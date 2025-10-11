@@ -8,6 +8,10 @@ class NimEnv:
         player: the current player (`0` or `1`)
         winner: the winner of the game, or `None` if the game is till in process
     """
+
+    WIN_REWARD = 100.0
+    ELSE_REWARD = 0.0
+
     def __init__(self, initial: None | list[int] = None) -> None:
         """Initialize the environment.
 
@@ -27,9 +31,9 @@ class NimEnv:
         Returns:
             A list of tuple in format (pile_number, count).
         """
-        raise NotImplementedError() # TODO
+        raise NotImplementedError # TODO
 
-    def move(self, action: tuple[int, int]):
+    def move(self, action: tuple[int, int]) -> float:
         """Make the move `action`.
 
         This method will update `self.piles`, `self.player` and `self.winner`.
@@ -41,13 +45,15 @@ class NimEnv:
         Args:
             action: the action in format (pile_number, count)
 
+        Returns:
+            A float value for reward. return `WIN_REWARD` if the current player
+            wins, return `ELSE_REWARD` otherwise.
+
         Raises:
             ValueError: if the action is invalid.
             RuntimeError: if the game is already end.
         """
-        raise NotImplementedError() # TODO
-
-    
+        raise NotImplementedError # TODO
 
 class Agent(ABC):
     """
