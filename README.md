@@ -76,7 +76,7 @@ python3 {FILE_YOU_WANT_TO_RUN}.py
 
     - 已经将你的功能分支推到了云端仓库：
         ```sh
-        git push
+        git push --set-upstream origin feat/xxx
         ```
 
     之后等到 PR 通过之后，代码会合并到 `main` 分支，再使用 `git pull` 合并到本地:
