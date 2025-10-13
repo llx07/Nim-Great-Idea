@@ -79,6 +79,8 @@ python3 {FILE_YOU_WANT_TO_RUN}.py
         git push --set-upstream origin feat/xxx
         ```
 
+    然后打开仓库 <https://github.com/llx07/Nim-Great-Idea>，就能用网页发起 Pull Request 了。
+
     之后等到 PR 通过之后，代码会合并到 `main` 分支，再使用 `git pull` 合并到本地:
     ```sh
     git checkout main
@@ -90,4 +92,5 @@ python3 {FILE_YOU_WANT_TO_RUN}.py
     可以删除无用的功能分支：
     ```
     git branch -d feat/xxx
+    git push origin -d feat/xxx
     ```
