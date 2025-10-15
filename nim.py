@@ -31,7 +31,11 @@ class NimEnv:
         Returns:
             A list of tuple in format (pile_number, count).
         """
-        raise NotImplementedError # TODO
+        actions = []
+        for pile_number, stones in enumerate(self.piles):
+            for count in range(1, stones + 1):
+                actions.append((pile_number,count))
+        return actions
 
     def move(self, action: tuple[int, int]) -> float:
         """Make the move `action`.
@@ -41,10 +45,31 @@ class NimEnv:
         If `self.winner` is not None, calling this method will cause an
         RuntimeError. If `action` is invalid, calling the method will cause
         an ValueError.
-
+        """
+        if self.winner is not None:
+            raise RuntimeError("The game has ended")
+        
+        pile_number, count = action
+        if pile_number < 0 or pile_number >= 4:
+            raise ValueError(f"Invalid pile_num:{pile_number}")
+        if count < 1 or count > self.piles[pile_number]:
+            raise ValueError(f"Invalid stone count:{count} in pile:{pile_number} which has {self.piles[pile_number]} stones")
+        """
         Args:
             action: the action in format (pile_number, count)
+        """
+        self.piles[pile_number] -= count
+        
+        if all(stones == 0 for stones in self.piles):
+            self.winner = self.player
+            reward = self.WIN_REWARD
 
+        else:
+            self.winner = 1 - self.player
+            reward = self.ELSE_REWARD
+        
+        return reward
+        """
         Returns:
             A float value for reward. return `WIN_REWARD` if the current player
             wins, return `ELSE_REWARD` otherwise.
@@ -53,7 +78,6 @@ class NimEnv:
             ValueError: if the action is invalid.
             RuntimeError: if the game is already end.
         """
-        raise NotImplementedError # TODO
 
 class Agent(ABC):
     """
