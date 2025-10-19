@@ -39,7 +39,7 @@ class NimEnv:
         """Make the move `action`.
 
         If the action is invalid, this method will return -1 and do nothing.
-        Otherwise, this method will update `self.piles`, `self.player` and 
+        Otherwise, this method will update `self.piles`, `self.player` and
         `self.winner`.
 
 
@@ -63,7 +63,7 @@ class NimEnv:
         self.piles[pile_number] -= count
 
         if all(stones == 0 for stones in self.piles):
-            self.winner = self.player
+            self.winner = self.player ^ 1
             return 0
 
         else:
