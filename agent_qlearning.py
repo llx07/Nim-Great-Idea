@@ -21,7 +21,7 @@ class QLearningAgent(nim.Agent):
 
     def save(self) -> None:
         """Save the q-table into file."""
-        # See the module pickle
+
         with open("qtable.data", "wb") as file:
             pickle.dump(self.q, file)
 
@@ -36,23 +36,17 @@ class QLearningAgent(nim.Agent):
 
         state_before = tuple(state_before)
         state_after = tuple(state_after)
-        # print(f"{state_before=} {state_after=}")
-        # print(f"bef = {self.q.get(state_before)}")
-        # print(f"aft = {self.q.get(state_after)}")
+
         if state_before not in self.q:
             self.q[state_before] = dict()
         if action not in self.q[state_before]:
             self.q[state_before][action] = 0
-        # print(f"bef = {self.q.get(state_before)}")
-        # print(f"aft = {self.q.get(state_after)}")
+
         self.q[state_before][action] = (1 - self.alpha) * self.q[state_before][
             action
         ] + self.alpha * (
             reward + self.gamma * max(self.q.get(state_after, {0: 0}).values())
         )
-
-        # print(f"bef = {self.q[state_before]}")
-        # print(f"aft = {self.q[state_after]}")
 
     def choose_action(self, state: nim.NimEnv) -> tuple[int, int]:
         """Given a state `state`, return an action."""
@@ -82,7 +76,6 @@ class QLearningAgent(nim.Agent):
 
 
 if __name__ == "__main__":
-    # Train the agent here.
     agent = QLearningAgent()
     for _ in range(2000000):
         if _ % 1000 == 0:
@@ -94,7 +87,6 @@ if __name__ == "__main__":
         while env.winner is None:
             state_before = copy.deepcopy(env.piles)
             action = agent.choose_action_with_epsilion(env)
-            # print(env.piles, action, env.get_available_actions())
             assert env.move(action) != -1
             state_after = copy.deepcopy(env.piles)
 
