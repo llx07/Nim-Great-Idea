@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import random
 
-import nim
+import core.nim as nim
 
 
 class Network(nn.Module):
