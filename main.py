@@ -1,6 +1,6 @@
-import nim
-from agent_random import AgentRandom
-from agent_qlearning import QLearningAgent
+import core.nim as nim
+from agents.agent_random import AgentRandom
+from agents.agent_qlearning import QLearningAgent
 import random
 
 players = [AgentRandom(), QLearningAgent()]

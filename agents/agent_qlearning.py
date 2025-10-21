@@ -1,4 +1,4 @@
-import nim
+import core.nim as nim
 import pickle
 import os
 import random
@@ -11,10 +11,10 @@ class QLearningAgent(nim.Agent):
         Also set alpha and gamma.
         """
 
-        if not os.path.exists("qtable.data"):
+        if not os.path.exists("model/qtable.data"):
             self.q = dict()
         else:
-            with open("qtable.data", "rb") as file:
+            with open("model/qtable.data", "rb") as file:
                 self.q = pickle.load(file)
         self.alpha = learning_rate
         self.gamma = discount_factor
@@ -27,15 +27,15 @@ class QLearningAgent(nim.Agent):
 
     def update(
         self,
-        state_before: list[int],
+        state_before_: list[int],
         action: tuple[int, int],
-        state_after: list[int],
+        state_after_: list[int],
         reward: float,
     ):
         """Update the Q value for the state"""
 
-        state_before = tuple(state_before)
-        state_after = tuple(state_after)
+        state_before = tuple(state_before_)
+        state_after = tuple(state_after_)
 
         if state_before not in self.q:
             self.q[state_before] = dict()
@@ -59,13 +59,7 @@ class QLearningAgent(nim.Agent):
             if (max_value is None) or (max_value < value):
                 max_value = value
                 max_action = action
-        try:
-            assert state.piles[action[0]] >= action[1]
-        except AssertionError as f:
-            print(state.piles)
-            print(self.q[tuple(state.piles)])
-            raise f
-        return max_action
+        return max_action  # type: ignore
 
     def choose_action_with_epsilion(
         self, state: nim.NimEnv, epsilion: float = 0.1
