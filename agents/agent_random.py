@@ -1,4 +1,4 @@
-import nim
+import core.nim as nim
 import random
 
 class AgentRandom(nim.Agent):
