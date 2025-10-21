@@ -1,9 +1,9 @@
 import core.nim as nim
-from agents.agent_random import AgentRandom
-from agents.agent_qlearning import QLearningAgent
+from agents.random import RandomAgent
+from agents.qlearning import QLearningAgent
 import random
 
-players = [AgentRandom(), QLearningAgent()]
+players = [RandomAgent(), QLearningAgent()]
 
 rounds = 1000
 win_count = [0, 0]

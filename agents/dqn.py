@@ -1,9 +1,14 @@
+import sys
 import os
 import torch
 import torch.nn as nn
 import numpy as np
 import pandas as pd
 import random
+
+
+# Allow running this file separately
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 import core.nim as nim
 
