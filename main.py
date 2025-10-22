@@ -4,12 +4,13 @@ from agents.qlearning import QLearningAgent
 from agents.dqn import DQNAgent
 import random
 
-players = [RandomAgent(), DQNAgent()]
+players = [DQNAgent(), RandomAgent()]
 
 rounds = 1000
 win_count = [0, 0]
 for _ in range(rounds):
     game = nim.NimEnv([random.randint(5, 9) for _ in range(4)])
+    game.player = _ % 2
     while game.winner is None:
         # print("player now = ", game.player)
         action = players[game.player].choose_action(game)

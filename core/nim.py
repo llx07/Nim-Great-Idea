@@ -83,13 +83,14 @@ class Agent(ABC):
 
 
 def play(agent1: Agent, agent2: Agent, count: int = 0) -> tuple[float, float]:
-    """Let agent1 play with agent2 count rounds.
+    """Let `agent1` play with `agent2` `count` rounds.
 
     Return the win rate of each agent.
     """
     win_count = [0, 0]
     for _ in range(count):
         game = NimEnv([random.randint(1, 9) for _ in range(4)])
+        game.player = _ % 2
         while game.winner is None:
             action = (
                 agent1.choose_action(game)

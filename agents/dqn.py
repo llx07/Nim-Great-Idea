@@ -19,10 +19,14 @@ import agents.rand as rand
 class Network(nn.Module):
     """A simple network for DQN"""
 
-    def __init__(self, n_features: int, n_actions: int, n_hidden: int = 32):
+    def __init__(self, n_features: int, n_actions: int, n_hidden: int = 128):
         super(Network, self).__init__()
         self.net = nn.Sequential(
             nn.Linear(in_features=n_features, out_features=n_hidden, bias=True),
+            nn.ReLU(),
+            nn.Linear(in_features=n_hidden, out_features=n_hidden, bias=True),
+            nn.ReLU(),
+            nn.Linear(in_features=n_hidden, out_features=n_hidden, bias=True),
             nn.ReLU(),
             nn.Linear(in_features=n_hidden, out_features=n_hidden, bias=True),
             nn.ReLU(),
@@ -295,7 +299,9 @@ class DQNAgent(nim.Agent):
                     reward = 0
 
                 pile_after = copy.deepcopy(env.piles)
-                self.net.store_transition(pile_before, action, reward, pile_after)
+                if reward == 0:
+                    if random.random() < 0.05:
+                        self.net.store_transition(pile_before, action, reward, pile_after)
 
                 if step > 200:  # only learn after 200 steps
                     self.net.learn()
