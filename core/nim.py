@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import random
 
 
 class NimEnv:
@@ -79,3 +80,23 @@ class Agent(ABC):
     @abstractmethod
     def choose_action(self, state: NimEnv) -> tuple[int, int]:
         pass
+
+
+def play(agent1: Agent, agent2: Agent, count: int = 0) -> tuple[float, float]:
+    """Let `agent1` play with `agent2` `count` rounds.
+
+    Return the win rate of each agent.
+    """
+    win_count = [0, 0]
+    for _ in range(count):
+        game = NimEnv([random.randint(1, 9) for _ in range(4)])
+        game.player = _ % 2
+        while game.winner is None:
+            action = (
+                agent1.choose_action(game)
+                if game.player == 0
+                else agent2.choose_action(game)
+            )
+            assert game.move(action) != -1
+        win_count[game.winner] += 1
+    return win_count[0] / count, win_count[1] / count

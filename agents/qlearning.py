@@ -1,6 +1,11 @@
+import os
+import sys
+
+# Allow running this file separately
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import core.nim as nim
 import pickle
-import os
 import random
 import copy
 
