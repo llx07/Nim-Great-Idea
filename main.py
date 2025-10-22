@@ -1,16 +1,20 @@
 import core.nim as nim
-from agents.random import RandomAgent
+from agents.rand import RandomAgent
 from agents.qlearning import QLearningAgent
+from agents.dqn import DQNAgent
 import random
 
-players = [RandomAgent(), QLearningAgent()]
+players = [RandomAgent(), DQNAgent()]
 
 rounds = 1000
 win_count = [0, 0]
 for _ in range(rounds):
     game = nim.NimEnv([random.randint(5, 9) for _ in range(4)])
     while game.winner is None:
-        game.move(players[game.player].choose_action(game))
+        # print("player now = ", game.player)
+        action = players[game.player].choose_action(game)
+        # print(game.piles,game.player, action)
+        assert game.move(action) != -1
     win_count[game.winner] += 1
 
 
