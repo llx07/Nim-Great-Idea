@@ -72,6 +72,9 @@ class QLearningAgent(nim.Agent):
         if random.random() < epsilion:
             return random.choice(state.get_available_actions())
         return self.choose_action(state)
+    
+    def name(self) -> str:
+        return "Q Learning"
 
 
 if __name__ == "__main__":

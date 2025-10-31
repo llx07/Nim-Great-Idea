@@ -3,7 +3,6 @@ import os
 import torch
 import torch.nn as nn
 import numpy as np
-import pandas as pd
 import random
 import copy
 import matplotlib.pyplot as plt
@@ -327,6 +326,9 @@ class DQNAgent(nim.Agent):
             return random.choice(available_actions)
         else:
             return action
+        
+    def name(self) -> str:
+        return "DQN"
 
 
 if __name__ == "__main__":
