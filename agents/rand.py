@@ -6,4 +6,4 @@ class RandomAgent(nim.Agent):
         return random.choice(state.get_available_actions())
     
     def name(self) -> str:
-        return "随即策略"
+        return "随机策略"
