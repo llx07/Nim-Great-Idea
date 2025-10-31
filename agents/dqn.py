@@ -327,6 +327,9 @@ class DQNAgent(nim.Agent):
             return random.choice(available_actions)
         else:
             return action
+        
+    def name(self) -> str:
+        return "DQN"
 
 
 if __name__ == "__main__":

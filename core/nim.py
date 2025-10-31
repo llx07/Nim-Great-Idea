@@ -80,6 +80,10 @@ class Agent(ABC):
     @abstractmethod
     def choose_action(self, state: NimEnv) -> tuple[int, int]:
         pass
+    
+    @abstractmethod
+    def name(self) -> str:
+        pass
 
 
 def play(agent1: Agent, agent2: Agent, count: int = 0) -> tuple[float, float]:
