@@ -37,7 +37,7 @@ class AlphaBetaAgent(nim.Agent):
         """
 
         if all(x == 0 for x in piles):
-            return 1 if player == 0 else -1
+            return -1 if player == 0 else 1
 
         actions = AlphaBetaAgent._get_available_actions(piles)
 
