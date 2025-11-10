@@ -3,9 +3,10 @@ from agents.rand import RandomAgent
 from agents.qlearning import QLearningAgent
 from agents.dqn import DQNAgent
 from agents.alpha_beta import AlphaBetaAgent
+from agents.maths_optimal import OptimalAgent
 import random
 
-players = [RandomAgent(), QLearningAgent(), DQNAgent(), AlphaBetaAgent()]
+players = [RandomAgent(), QLearningAgent(), DQNAgent(), AlphaBetaAgent(), OptimalAgent()]
 
 ROUNDS = 1000
 
