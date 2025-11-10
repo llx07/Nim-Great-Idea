@@ -64,7 +64,7 @@ class NimEnv:
         self.piles[pile_number] -= count
 
         if all(stones == 0 for stones in self.piles):
-            self.winner = self.player ^ 1
+            self.winner = self.player
             return 0
 
         else:

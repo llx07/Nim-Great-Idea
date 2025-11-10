@@ -289,11 +289,11 @@ class DQNAgent(nim.Agent):
 
                 # calculate reward
                 if status == 0:
-                    # Lose. give penalty
-                    reward = -5.0
+                    # Win. give reward
+                    reward = 5.0
                     if last is not None:
-                        # give reward for last transition
-                        self.net.store_transition(last[0], last[1], 5.0, last[2])
+                        # give penalty for last transition
+                        self.net.store_transition(last[0], last[1], -5.0, last[2])
                 else:
                     reward = 0
 

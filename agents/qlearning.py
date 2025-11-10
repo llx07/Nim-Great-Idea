@@ -27,7 +27,7 @@ class QLearningAgent(nim.Agent):
     def save(self) -> None:
         """Save the q-table into file."""
 
-        with open("qtable.data", "wb") as file:
+        with open("model/qtable.data", "wb") as file:
             pickle.dump(self.q, file)
 
     def update(
@@ -80,24 +80,24 @@ class QLearningAgent(nim.Agent):
 if __name__ == "__main__":
     agent = QLearningAgent()
     for _ in range(2000000):
-        if _ % 1000 == 0:
+        if _ % 10000 == 0:
             print(f"Iteration #{_}")
+            agent.save()
         env = nim.NimEnv([random.randint(5, 9) for _ in range(4)])
 
         last_move = None
 
         while env.winner is None:
-            state_before = copy.deepcopy(env.piles)
+            state_before = copy.copy(env.piles)
             action = agent.choose_action_with_epsilion(env)
             assert env.move(action) != -1
-            state_after = copy.deepcopy(env.piles)
+            state_after = copy.copy(env.piles)
 
             if env.winner is not None:
-                agent.update(state_before, action, state_after, -1)
+                agent.update(state_before, action, state_after, 1)
                 if last_move is not None:
-                    agent.update(*last_move, 1)
+                    agent.update(*last_move, -1)
             else:
                 agent.update(state_before, action, state_after, 0)
 
             last_move = (state_before, action, state_after)
-    agent.save()
